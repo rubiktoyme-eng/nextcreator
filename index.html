@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社NEXTCREATOR｜AI自動予約システム</title>
+<meta name="description" content="株式会社NEXTCREATORは、美容サロン向けのAI自動予約システムを月額制で提供しています。">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1f36;
+    --muted: #5b6478;
+    --line: #e3e8ee;
+    --accent: #2f4bd8;
+    --accent-soft: #eef1fc;
+    --card: #f7f9fc;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    line-height: 1.8;
+    font-size: 16px;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+  header {
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+  }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .brand { font-weight: 700; font-size: 18px; letter-spacing: .02em; }
+  .brand small { display: block; font-size: 12px; color: var(--muted); font-weight: 500; }
+  nav a { margin-left: 18px; font-size: 14px; color: var(--muted); }
+
+  .hero { padding: 64px 0 48px; }
+  .hero .eyebrow { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: .08em; }
+  .hero h1 { font-size: 34px; line-height: 1.35; margin: 10px 0 16px; }
+  .hero p { font-size: 17px; color: var(--muted); max-width: 640px; margin: 0; }
+  .cta { display: inline-block; margin-top: 26px; background: var(--accent); color: #fff; padding: 12px 22px; border-radius: 8px; font-weight: 600; }
+  .cta:hover { text-decoration: none; opacity: .92; }
+
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 22px; margin: 0 0 18px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+  .card h3 { margin: 0 0 8px; font-size: 16px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .plans .card { background: #fff; }
+  .plans .price { font-size: 15px; color: var(--fg); font-weight: 600; margin-top: 8px; }
+  .note { font-size: 14px; color: var(--muted); margin-top: 14px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 12px 10px; border-bottom: 1px solid var(--line); }
+  th { width: 32%; color: var(--muted); font-weight: 600; background: var(--card); }
+  @media (max-width: 600px) {
+    th, td { display: block; width: 100%; }
+    th { border-bottom: none; padding-bottom: 4px; }
+    td { padding-top: 4px; }
+    .hero h1 { font-size: 27px; }
+  }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">株式会社NEXTCREATOR<small>AI自動予約システム</small></div>
+    <nav>
+      <a href="#service">サービス</a>
+      <a href="#plans">料金</a>
+      <a href="#company">会社概要</a>
+      <a href="#tokusho">特定商取引法に基づく表記</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">FOR BEAUTY SALONS</div>
+    <h1>美容サロンの予約対応を、<br>AIが24時間自動で。</h1>
+    <p>株式会社NEXTCREATORは、美容サロン向けの「AI自動予約システム」を月額制で提供しています。電話やメッセージでの予約受付、空き枠の案内、リマインド送信をAIが自動化し、スタッフの負担を減らして予約の取りこぼしを防ぎます。</p>
+    <a class="cta" href="#contact">導入のご相談はこちら</a>
+  </div>
+</div>
+
+<section id="service">
+  <div class="wrap">
+    <h2>サービス概要</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>24時間の自動予約受付</h3>
+        <p>営業時間外や施術中でも、AIがお客様からの予約リクエストに応答し、空き状況を確認したうえで予約を確定します。</p>
+      </div>
+      <div class="card">
+        <h3>予約管理システムとの連携</h3>
+        <p>サロンで利用中の予約台帳・管理システムと連携し、二重予約を防ぎながら予約情報を一元管理します。</p>
+      </div>
+      <div class="card">
+        <h3>リマインド・フォロー自動化</h3>
+        <p>来店前日のリマインドや、来店後のお礼メッセージを自動送信。無断キャンセルの削減と再来店率の向上を支援します。</p>
+      </div>
+      <div class="card">
+        <h3>導入・運用サポート</h3>
+        <p>初期設定から運用開始後の調整まで、担当者がサポートします。専門知識がなくてもすぐにご利用いただけます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plans" class="plans">
+  <div class="wrap">
+    <h2>料金プラン</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>ライトプラン</h3>
+        <p>小規模サロン向け。基本の自動予約受付機能をご利用いただけます。</p>
+        <div class="price">月額制（税込）</div>
+      </div>
+      <div class="card">
+        <h3>スタンダードプラン</h3>
+        <p>予約管理システム連携とリマインド機能を含む標準プランです。</p>
+        <div class="price">月額制（税込）</div>
+      </div>
+      <div class="card">
+        <h3>プレミアムプラン</h3>
+        <p>複数店舗の運用や個別カスタマイズに対応する上位プランです。</p>
+        <div class="price">月額制（税込）</div>
+      </div>
+    </div>
+    <p class="note">各プランの月額料金は店舗数・ご利用規模により異なります。お見積りは <a href="#contact">お問い合わせ</a> よりご依頼ください。お支払いはクレジットカード決済または銀行振込に対応しています。</p>
+  </div>
+</section>
+
+<section id="company">
+  <div class="wrap">
+    <h2>会社概要</h2>
+    <table>
+      <tr><th>会社名</th><td>株式会社NEXTCREATOR</td></tr>
+      <tr><th>代表者</th><td>代表取締役　中野 陽平</td></tr>
+      <tr><th>所在地</th><td>〒556-0011<br>大阪府大阪市浪速区難波中3丁目6-3　リアライズ難波中ビル802</td></tr>
+      <tr><th>事業内容</th><td>美容サロン向けAI自動予約システムの開発・提供（SaaS）</td></tr>
+      <tr><th>電話番号</th><td>080-4025-1083</td></tr>
+      <tr><th>メールアドレス</th><td><a href="mailto:rubik.toy.me@gmail.com">rubik.toy.me@gmail.com</a></td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="tokusho">
+  <div class="wrap">
+    <h2>特定商取引法に基づく表記</h2>
+    <table>
+      <tr><th>販売事業者</th><td>株式会社NEXTCREATOR</td></tr>
+      <tr><th>運営責任者</th><td>中野 陽平</td></tr>
+      <tr><th>所在地</th><td>〒556-0011　大阪府大阪市浪速区難波中3丁目6-3　リアライズ難波中ビル802</td></tr>
+      <tr><th>電話番号</th><td>080-4025-1083（受付時間：平日10:00〜18:00）</td></tr>
+      <tr><th>メールアドレス</th><td>rubik.toy.me@gmail.com</td></tr>
+      <tr><th>販売価格</th><td>月額制。ご契約プランにより異なります（税込表示）。金額はお申込み前にお見積り・契約書面にてご案内します。</td></tr>
+      <tr><th>商品代金以外の必要料金</th><td>銀行振込の場合の振込手数料、およびインターネット接続にかかる通信費はお客様のご負担となります。</td></tr>
+      <tr><th>お支払い方法</th><td>クレジットカード決済（毎月自動課金）／銀行振込（毎月発行する請求書によるお支払い）</td></tr>
+      <tr><th>お支払い時期</th><td>クレジットカード：毎月のご利用開始日に自動課金<br>銀行振込：毎月発行する請求書に記載の支払期日まで</td></tr>
+      <tr><th>サービス提供時期</th><td>お申込みおよび初期設定の完了後、速やかにご利用いただけます。</td></tr>
+      <tr><th>契約期間・解約</th><td>1か月ごとの自動更新です。解約をご希望の場合は、メールまたはお電話にてお申し出ください。<strong>解約は、お申し出いただいた月の翌月末まで有効</strong>となり、翌々月以降の課金は発生しません。</td></tr>
+      <tr><th>返品・返金</th><td>サービスの性質上、ご利用開始後の返品・返金はお受けできません。解約時の<strong>日割りによる返金は行っておりません</strong>。</td></tr>
+      <tr><th>動作環境</th><td>インターネットに接続できる環境と、一般的なウェブブラウザ（最新版のChrome、Safari等）が必要です。</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>お問い合わせ</h2>
+    <p>導入のご相談、お見積り、サービスに関するご質問は下記までご連絡ください。</p>
+    <table>
+      <tr><th>メール</th><td><a href="mailto:rubik.toy.me@gmail.com">rubik.toy.me@gmail.com</a></td></tr>
+      <tr><th>電話</th><td>080-4025-1083（平日10:00〜18:00）</td></tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 株式会社NEXTCREATOR</div>
+</footer>
+
+</body>
+</html>
