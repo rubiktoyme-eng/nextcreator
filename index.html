@@ -136,7 +136,7 @@
         <div class="price">月額制（税込）</div>
       </div>
     </div>
-    <p class="note">各プランの月額料金は店舗数・ご利用規模により異なります。お見積りは <a href="#contact">お問い合わせ</a> よりご依頼ください。お支払いはクレジットカード決済または銀行振込に対応しています。</p>
+    <p class="note">各プランの月額料金は店舗数・ご利用規模により異なります。お見積りは <a href="#contact">お問い合わせ</a> よりご依頼ください。お支払いはクレジットカード決済または銀行振込に対応しています（課金日は毎月1日、お申込み月は日割り）。</p>
   </div>
 </section>
 
@@ -165,8 +165,8 @@
       <tr><th>メールアドレス</th><td>rubik.toy.me@gmail.com</td></tr>
       <tr><th>販売価格</th><td>月額制。ご契約プランにより異なります（税込表示）。金額はお申込み前にお見積り・契約書面にてご案内します。</td></tr>
       <tr><th>商品代金以外の必要料金</th><td>銀行振込の場合の振込手数料、およびインターネット接続にかかる通信費はお客様のご負担となります。</td></tr>
-      <tr><th>お支払い方法</th><td>クレジットカード決済（毎月自動課金）／銀行振込（毎月発行する請求書によるお支払い）</td></tr>
-      <tr><th>お支払い時期</th><td>クレジットカード：毎月のご利用開始日に自動課金<br>銀行振込：毎月発行する請求書に記載の支払期日まで</td></tr>
+      <tr><th>お支払い方法</th><td>クレジットカード決済（毎月1日に自動課金）／銀行振込（毎月1日に発行する請求書によるお支払い）</td></tr>
+      <tr><th>お支払い時期</th><td>課金日は毎月1日です。<br>クレジットカード：お申込み月はご登録日から月末までの日割り分をご登録時にお支払いいただき、翌月以降は毎月1日に1か月分を自動課金<br>銀行振込：お申込み月は日割り分の請求書、翌月以降は毎月1日に発行する請求書に記載の支払期日（発行から7日以内）までにお振込み</td></tr>
       <tr><th>サービス提供時期</th><td>お申込みおよび初期設定の完了後、速やかにご利用いただけます。</td></tr>
       <tr><th>契約期間・解約</th><td>1か月ごとの自動更新です。解約をご希望の場合は、メールまたはお電話にてお申し出ください。<strong>解約は、お申し出いただいた月の翌月末まで有効</strong>となり、翌々月以降の課金は発生しません。</td></tr>
       <tr><th>返品・返金</th><td>サービスの性質上、ご利用開始後の返品・返金はお受けできません。解約時の<strong>日割りによる返金は行っておりません</strong>。</td></tr>
@@ -189,6 +189,22 @@
 <footer>
   <div class="wrap">© 株式会社NEXTCREATOR</div>
 </footer>
+
+<div id="notice" style="display:none;position:fixed;left:0;right:0;top:0;z-index:99;padding:14px 20px;text-align:center;font-size:15px;color:#fff;background:#2f4bd8"></div>
+<script>
+  (function () {
+    var s = new URLSearchParams(location.search).get('status');
+    var el = document.getElementById('notice');
+    if (s === 'success') {
+      el.textContent = 'クレジットカードのご登録が完了しました。担当者より初期設定のご案内をお送りします。ありがとうございます。';
+      el.style.display = 'block';
+    } else if (s === 'cancel') {
+      el.textContent = 'カード登録は完了していません。メールに記載のリンクから、いつでも再度お手続きいただけます。';
+      el.style.background = '#8a6d00';
+      el.style.display = 'block';
+    }
+  })();
+</script>
 
 </body>
 </html>
