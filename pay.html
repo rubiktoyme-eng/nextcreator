@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>お支払い手続き｜株式会社NEXTCREATOR</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; color:#1a1f36; background:#fff; margin:0; padding:48px 20px; text-align:center; line-height:1.8; }
+  .brand { font-weight:700; font-size:16px; color:#5b6478; margin-bottom:28px; }
+  h1 { font-size:20px; margin:0 0 10px; }
+  p { margin:8px 0; color:#5b6478; font-size:15px; }
+  .spinner { width:36px; height:36px; border:4px solid #e3e8ee; border-top-color:#2f4bd8; border-radius:50%; margin:24px auto; animation:spin 1s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .btn { display:inline-block; margin-top:18px; background:#2f4bd8; color:#fff; padding:14px 26px; border-radius:8px; font-weight:600; text-decoration:none; font-size:16px; }
+  .hidden { display:none; }
+  .err { color:#b42318; }
+</style>
+</head>
+<body>
+<div class="brand">株式会社NEXTCREATOR｜SalonLink</div>
+<div id="loading">
+  <h1>お支払いページへ移動しています…</h1>
+  <div class="spinner"></div>
+  <p>そのまましばらくお待ちください。</p>
+</div>
+<div id="ready" class="hidden">
+  <h1>お支払いページの準備ができました</h1>
+  <p>自動で移動しない場合は、下のボタンを押してください。</p>
+  <a id="go" class="btn" href="#">お支払いページを開く</a>
+</div>
+<div id="error" class="hidden">
+  <h1 id="errTitle">エラーが発生しました</h1>
+  <p id="errMsg" class="err"></p>
+  <p>ご不明な点は <a href="mailto:rubik.toy.me@gmail.com">rubik.toy.me@gmail.com</a> までご連絡ください。</p>
+</div>
+<script>
+(function () {
+  var WEB_APP = 'https://script.google.com/macros/s/AKfycbw3TkUaXWMnh6q-icXoAuyjnSJXmwL4NB-3IV3adb-e1tNePzN9k3LBxXFjSDgMT_wB2w/exec';
+  var t = new URLSearchParams(location.search).get('t') || '';
+  function show(id) {
+    ['loading', 'ready', 'error'].forEach(function (x) { document.getElementById(x).className = (x === id ? '' : 'hidden'); });
+  }
+  function fail(title, msg) {
+    document.getElementById('errTitle').textContent = title;
+    document.getElementById('errMsg').textContent = msg || '';
+    show('error');
+  }
+  if (!t) { fail('リンクが正しくありません', 'お手数ですが、ご案内のリンクをもう一度お開きください。'); return; }
+  fetch(WEB_APP + '?json=1&t=' + encodeURIComponent(t), { method: 'GET', redirect: 'follow' })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d && d.url) {
+        document.getElementById('go').setAttribute('href', d.url);
+        show('ready');
+        location.href = d.url;
+      } else if (d && d.error === 'ALREADY_REGISTERED') {
+        fail('すでにご登録済みです', 'お支払い方法の登録はすでに完了しています。');
+      } else if (d && d.error === 'INVALID_LINK') {
+        fail('リンクが正しくありません', 'お手数ですが、ご案内のリンクをもう一度お開きください。');
+      } else {
+        fail('エラーが発生しました', '時間をおいて再度お試しください。（' + (d && d.error ? d.error : '不明なエラー') + '）');
+      }
+    })
+    .catch(function (e) {
+      // 直接ウェブアプリを開く（こちらは1回タップが必要な場合があります）
+      document.getElementById('go').setAttribute('href', WEB_APP + '?t=' + encodeURIComponent(t));
+      show('ready');
+    });
+})();
+</script>
+</body>
+</html>
