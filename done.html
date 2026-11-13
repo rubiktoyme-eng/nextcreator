@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>お手続き結果｜株式会社NEXTCREATOR</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; color:#1a1f36; background:#fff; margin:0; padding:48px 20px; text-align:center; line-height:1.9; }
+  .brand { font-weight:700; font-size:16px; color:#5b6478; margin-bottom:28px; }
+  .card { max-width:520px; margin:0 auto; border:1px solid #e3e8ee; border-radius:14px; padding:32px 24px; background:#f7f9fc; }
+  h1 { font-size:21px; margin:0 0 12px; }
+  p { margin:8px 0; color:#5b6478; font-size:15px; }
+  .mark { width:54px; height:54px; border-radius:50%; margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:28px; color:#fff; background:#2f4bd8; }
+  .mark.warn { background:#8a6d00; }
+  a { color:#2f4bd8; }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+<div class="brand">株式会社NEXTCREATOR｜SalonLink</div>
+<div class="card" id="ok">
+  <div class="mark">✓</div>
+  <h1>クレジットカードのご登録が完了しました</h1>
+  <p>お手続きありがとうございます。<br>担当者より初期設定のご案内をお送りします。</p>
+  <p>このページは閉じていただいて問題ありません。</p>
+</div>
+<div class="card hidden" id="ng">
+  <div class="mark warn">!</div>
+  <h1>カードのご登録は完了していません</h1>
+  <p>ご案内したリンクから、いつでも再度お手続きいただけます。</p>
+</div>
+<p style="margin-top:24px">ご不明な点は <a href="mailto:nextcreator.toi@gmail.com">nextcreator.toi@gmail.com</a> までご連絡ください。</p>
+<script>
+  (function () {
+    var s = new URLSearchParams(location.search).get('status');
+    if (s === 'cancel') { document.getElementById('ok').className = 'card hidden'; document.getElementById('ng').className = 'card'; }
+  })();
+</script>
+</body>
+</html>
