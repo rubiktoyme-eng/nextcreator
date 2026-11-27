@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>お申し込み手続き（請求書払い）｜株式会社NEXTCREATOR</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; color:#1a1f36; background:#fff; margin:0; padding:40px 20px 60px; line-height:1.8; }
+  .wrap { max-width:520px; margin:0 auto; }
+  .brand { font-weight:700; font-size:16px; color:#5b6478; margin-bottom:24px; text-align:center; }
+  h1 { font-size:20px; margin:0 0 10px; text-align:center; }
+  p { margin:8px 0; color:#5b6478; font-size:15px; }
+  .center { text-align:center; }
+  .spinner { width:36px; height:36px; border:4px solid #e3e8ee; border-top-color:#2f4bd8; border-radius:50%; margin:24px auto; animation:spin 1s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .cname { font-size:17px; font-weight:700; color:#1a1f36; text-align:center; margin:14px 0 6px; }
+  .docs { background:#f6f8fb; border:1px solid #e3e8ee; border-radius:10px; padding:14px 18px; margin:18px 0; }
+  .docs a { display:block; color:#2f4bd8; font-weight:600; padding:4px 0; }
+  label.f { display:block; font-size:14px; font-weight:600; color:#1a1f36; margin:16px 0 6px; }
+  input[type=email], input[type=text] { width:100%; box-sizing:border-box; font-size:16px; padding:12px 14px; border:1px solid #c9d1dc; border-radius:8px; }
+  .agree { display:flex; gap:10px; align-items:flex-start; margin:22px 0 6px; font-size:15px; color:#1a1f36; }
+  .agree input { width:20px; height:20px; margin-top:4px; flex:none; }
+  .btn { display:block; width:100%; margin-top:18px; background:#2f4bd8; color:#fff; padding:15px 26px; border:0; border-radius:8px; font-weight:700; font-size:16px; cursor:pointer; }
+  .btn[disabled] { background:#aab4c8; cursor:not-allowed; }
+  .note { font-size:13px; color:#7a8499; }
+  .err { color:#c0392b; font-size:14px; min-height:1.4em; margin-top:10px; }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">SalonLink｜株式会社NEXTCREATOR</div>
+
+  <div id="loading" class="center">
+    <h1>読み込んでいます</h1>
+    <div class="spinner"></div>
+  </div>
+
+  <div id="form" class="hidden">
+    <h1>お申し込み手続き（請求書払い）</h1>
+    <div class="cname"><span id="cname"></span> 様</div>
+    <p>ご契約内容をご確認のうえ、請求書の送付先をご入力ください。お支払いは、メールでお送りする請求書に記載の口座へのお振込みとなります。</p>
+    <div class="docs">
+      <a href="terms.html" target="_blank" rel="noopener">SalonLink利用規約を開く</a>
+      <a id="termsLink" class="hidden" href="#" target="_blank" rel="noopener">個別契約条件（ご契約内容）を開く</a>
+    </div>
+    <label class="f" for="email">請求書の送付先メールアドレス</label>
+    <input type="email" id="email" autocomplete="email" inputmode="email" placeholder="example@example.com">
+    <label class="f" for="contact">ご担当者名</label>
+    <input type="text" id="contact" autocomplete="name" maxlength="60" placeholder="山田 太郎">
+    <label class="agree"><input type="checkbox" id="agree"><span id="agreeText">SalonLink利用規約を確認し、同意します。</span></label>
+    <button class="btn" id="submit" disabled>同意して申し込む</button>
+    <div class="err" id="formErr"></div>
+    <p class="note">お申し込み後、ご入力のメールアドレス宛てに請求書をお送りします。</p>
+  </div>
+
+  <div id="done" class="hidden center">
+    <h1>お申し込みが完了しました</h1>
+    <p>ありがとうございます。請求書は、ご入力いただいたメールアドレス宛てにお送りします。</p>
+    <p class="note">メールが届かない場合は、迷惑メールフォルダをご確認のうえ、下記までご連絡ください。</p>
+  </div>
+
+  <div id="error" class="hidden center">
+    <h1 id="errTitle">エラーが発生しました</h1>
+    <p id="errMsg"></p>
+  </div>
+
+  <p class="note center" style="margin-top:36px">お問い合わせ：nextcreator.toi@gmail.com ／ 080-4025-1083（平日10:00〜18:00）</p>
+</div>
+<script>
+(function () {
+  var WEB_APP = 'https://script.google.com/macros/s/AKfycbw3TkUaXWMnh6q-icXoAuyjnSJXmwL4NB-3IV3adb-e1tNePzN9k3LBxXFjSDgMT_wB2w/exec';
+  var t = new URLSearchParams(location.search).get('t') || '';
+  var $ = function (id) { return document.getElementById(id); };
+  function show(id) {
+    ['loading', 'form', 'done', 'error'].forEach(function (x) { $(x).className = (x === id ? (x === 'form' ? '' : 'center') : 'hidden'); });
+  }
+  function fail(title, msg) { $('errTitle').textContent = title; $('errMsg').textContent = msg || ''; show('error'); }
+  function validEmail(v) { return v.length <= 120 && /^[^@ ]+@[^@ ]+[.][^@ ]+$/.test(v); }
+  function refresh() { $('submit').disabled = !($('agree').checked && validEmail($('email').value.trim()) && $('contact').value.trim()); }
+  if (!t) { fail('リンクが正しくありません', 'お手数ですが、ご案内のリンクをもう一度お開きください。'); return; }
+  fetch(WEB_APP + '?json=1&act=bankinfo&t=' + encodeURIComponent(t), { method: 'GET', redirect: 'follow' })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d && d.error) { fail('リンクが正しくありません', 'お手数ですが、ご案内のリンクをもう一度お開きください。'); return; }
+      if (d && d.done) { fail('すでにお申し込み済みです', 'お申し込みはすでに完了しています。請求書はご登録のメールアドレス宛てにお送りしています。'); return; }
+      $('cname').textContent = d.name || '';
+      if (d.terms) {
+        $('termsLink').href = d.terms; $('termsLink').className = '';
+        $('agreeText').textContent = 'SalonLink利用規約および個別契約条件を確認し、同意します。';
+      }
+      show('form');
+    })
+    .catch(function () { fail('読み込みに失敗しました', '通信環境をご確認のうえ、もう一度お開きください。'); });
+  ['input', 'change'].forEach(function (ev) {
+    $('email').addEventListener(ev, refresh); $('contact').addEventListener(ev, refresh); $('agree').addEventListener(ev, refresh);
+  });
+  $('submit').addEventListener('click', function () {
+    var email = $('email').value.trim(), contact = $('contact').value.trim();
+    if (!$('agree').checked || !validEmail(email) || !contact) return;
+    $('submit').disabled = true; $('submit').textContent = '送信しています…'; $('formErr').textContent = '';
+    fetch(WEB_APP, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ act: 'bank_apply', t: t, email: email, contact: contact, agree: true }) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d && d.ok) { show('done'); return; }
+        if (d && d.error === 'ALREADY_REGISTERED') { fail('すでにお申し込み済みです', 'お申し込みはすでに完了しています。'); return; }
+        $('submit').textContent = '同意して申し込む'; refresh();
+        $('formErr').textContent = (d && d.error === 'INVALID_EMAIL') ? 'メールアドレスの形式をご確認ください。' : 'お申し込みを完了できませんでした。お手数ですが、時間をおいて再度お試しいただくか、下記までご連絡ください。';
+      })
+      .catch(function () { $('submit').textContent = '同意して申し込む'; refresh(); $('formErr').textContent = '通信に失敗しました。もう一度お試しください。'; });
+  });
+})();
+</script>
+</body>
+</html>
